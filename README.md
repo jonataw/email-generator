@@ -1,1 +1,1 @@
-# Email-CSS-Inliner
+# Email-Style-Inliner
