@@ -9,7 +9,7 @@ const inliner = new CSSInliner({
     template
 });
 
-const ext = '.handlebars';
+const ext = '.html';
 
 const he = require('he');
 
