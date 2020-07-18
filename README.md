@@ -1,1 +1,1 @@
-# Email-Style-Inliner
+# Email Generator
