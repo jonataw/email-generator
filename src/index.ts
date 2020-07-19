@@ -1,12 +1,13 @@
 import fs from 'fs';
-import path from 'path';
 import InlineCss from 'inline-css';
-import { SassCompiler } from './sass';
+import { SassCompiler } from './sass-compiler';
 import { minify } from 'html-minifier';
 import config from './config';
+import { Includer } from './includer';
 
 class EmailGenerator {
-  private readonly SOURCE_DIR = './src/templates';
+  private readonly STYLE_DIR = config.styleDir;
+  private readonly TEMPLATE_DIR = config.templateDir;
 
   constructor() {
     const compiler = new SassCompiler();
@@ -20,20 +21,25 @@ class EmailGenerator {
     const files = this.readSourceDir();
     files.forEach(async (file) => {
       try {
-        const html = fs.readFileSync(this.SOURCE_DIR + '/' + file, 'utf8');
-        let result = await InlineCss(html, {
-          url: 'file://' + __dirname + '/' + path.dirname(file) + '/styles/'
+        let html = fs.readFileSync(this.TEMPLATE_DIR + '/' + file, 'utf8');
+
+        if (config.useIncludes) {
+          html = new Includer(html).include();
+        }
+
+        let inlined = await InlineCss(html, {
+          url: 'file://' + __dirname + '/../' + this.STYLE_DIR + '/'
         });
 
         if (config.minify) {
-          result = minify(result, { collapseWhitespace: true });
+          inlined = minify(inlined, { collapseWhitespace: true });
         }
 
         fs.writeFile(
           './dist/' +
             file.substring(0, file.lastIndexOf('.')) +
             file.substring(file.lastIndexOf('.'), file.length),
-          result,
+          inlined,
           function (err) {
             if (err) {
               return console.error(err);
@@ -43,7 +49,9 @@ class EmailGenerator {
           }
         );
       } catch (error) {
-        console.error(`Unable to parse file '${this.SOURCE_DIR + '/' + file}'`);
+        console.error(
+          `Unable to parse file '${this.TEMPLATE_DIR + '/' + file}'`
+        );
         throw error;
       }
     });
@@ -51,9 +59,9 @@ class EmailGenerator {
 
   private readSourceDir(): string[] {
     try {
-      return fs.readdirSync(this.SOURCE_DIR);
+      return fs.readdirSync(this.TEMPLATE_DIR);
     } catch (error) {
-      console.error(`Unable to read directory '${this.SOURCE_DIR}'`);
+      console.error(`Unable to read directory '${this.TEMPLATE_DIR}'`);
       throw error;
     }
   }
