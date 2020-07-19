@@ -386,3 +386,4 @@ Temporary Items
 # Local
 .env
 .env*
+config.json

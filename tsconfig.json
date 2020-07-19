@@ -12,6 +12,7 @@
     "baseUrl": "./src",
     "incremental": true,
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "paths": {
       "~/*": [
         "./*"
