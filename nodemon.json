@@ -1,6 +1,7 @@
 {
     "watch": [
-        "src"
+        "src",
+        "resources"
     ],
     "ext": "ts html scss",
     "ignore": [
