@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 interface Config {
   /**
    * Should the output HTML be minified?
@@ -30,7 +32,10 @@ interface Config {
   includesDir: string;
 }
 
-import config from '../config.json';
+let config = {};
+try {
+  config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
+} catch (error) {}
 
 const defaults: Config = {
   minify: false,
