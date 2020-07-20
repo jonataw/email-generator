@@ -28,6 +28,7 @@ class EmailGenerator {
         }
 
         let inlined = await InlineCss(html, {
+          preserveMediaQueries: config.preserveMediaQueries,
           url: 'file://' + __dirname + '/../' + this.STYLE_DIR + '/'
         });
 

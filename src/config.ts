@@ -14,6 +14,12 @@ interface Config {
   useIncludes: boolean;
 
   /**
+   * Should media queries be preserved in the <head> styles?
+   * @default true
+   */
+  preserveMediaQueries: boolean;
+
+  /**
    * The directory where your email HTML templates are stored.
    * @default ./resources/templates
    */
@@ -40,6 +46,7 @@ try {
 const defaults: Config = {
   minify: false,
   useIncludes: true,
+  preserveMediaQueries: true,
   templateDir: './resources/templates',
   styleDir: './resources/styles',
   includesDir: './resources/includes'

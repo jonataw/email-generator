@@ -3,6 +3,7 @@
 This tool inlines your CSS automatically for your email templates. It also allows you to create [includeable](#includes) common snippets for reuse in multiple templates.
 
 ## Installation
+
 ```bash
 git clone https://github.com/jonataw/email-generator
 
@@ -15,13 +16,14 @@ npm install
 
 To override the default configuration, create a `config.json` file in the root directory.
 
-| Key         | Type    | Default               | Description                                               |
-|-------------|---------|-----------------------|-----------------------------------------------------------|
-| minify      | boolean | false                 | Should the output HTML be minified?                       |
-| useIncludes | boolean | true                  | Should includes be added to templates?                    |
-| templateDir | string  | ./resources/templates | The directory where your email HTML templates are stored. |
-| styleDir    | string  | ./resources/styles    | The directory where your email CSS/SCSS files are stored. |
-| includesDir | string  | ./resources/includes  | The directory where your includes are stored.             |
+| Key                  | Type    | Default               | Description                                               |
+| -------------------- | ------- | --------------------- | --------------------------------------------------------- |
+| minify               | boolean | false                 | Should the output HTML be minified?                       |
+| useIncludes          | boolean | true                  | Should includes be added to templates?                    |
+| preserveMediaQueries | boolean | true                  | Should media queries be preserved in the <head> styles?   |
+| templateDir          | string  | ./resources/templates | The directory where your email HTML templates are stored. |
+| styleDir             | string  | ./resources/styles    | The directory where your email CSS/SCSS files are stored. |
+| includesDir          | string  | ./resources/includes  | The directory where your includes are stored.             |
 
 ## Includes
 
