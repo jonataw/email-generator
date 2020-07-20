@@ -26,6 +26,7 @@ export class SassCompiler {
           this.compiled.push(filename);
         } catch (error) {
           console.error(`Unable to read SASS file '${this.STYLE_DIR}'`);
+          throw error;
         }
       });
     } catch (error) {
