@@ -1,3 +1,7 @@
+## ⛔️ Deprecated
+
+This project is no longer maintained. Please use the [Emgen](https://github.com/jonataw/emgen) package instead ([npm](https://npmjs.org/package/emgen)).
+
 # Email Generator
 
 This tool inlines your CSS automatically for your email templates. It also allows you to create [includeable](#includes) common snippets for reuse in multiple templates.
